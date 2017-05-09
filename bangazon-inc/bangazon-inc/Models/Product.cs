@@ -18,6 +18,8 @@ namespace bangazon_inc.Models
         public string Name { get; set; }
         [Required]
         public decimal Price { get; set; }
+        [Required]
+        public string Category  { get; set; }  
         [MaxLength(255)]
         public string Description { get; set; }
         public string Image { get; set; }
