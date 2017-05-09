@@ -216,6 +216,10 @@
     <Compile Include="Migrations\201705090220201_initialCreate.Designer.cs">
       <DependentUpon>201705090220201_initialCreate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201705092351039_addProductCategory.cs" />
+    <Compile Include="Migrations\201705092351039_addProductCategory.Designer.cs">
+      <DependentUpon>201705092351039_addProductCategory.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Customer.cs" />
@@ -302,6 +306,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201705090220201_initialCreate.resx">
       <DependentUpon>201705090220201_initialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705092351039_addProductCategory.resx">
+      <DependentUpon>201705092351039_addProductCategory.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
