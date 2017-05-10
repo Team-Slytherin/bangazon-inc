@@ -14,7 +14,7 @@ namespace bangazon_inc.Migrations
             AutomaticMigrationsEnabled = false;
         }
 
-        protected override void Seed(bangazon_inc.DAL.AppContext context)
+        protected override void Seed(DAL.AppContext context)
         {
             var customer = new Customer { CustomerId = 1, CustomerFirstName = "Taylor", CustomerLastName = "Harry", CustomerAddressLine1 = "123 Main Street", CustomerAddressLine2 = "Suite 1", CustomerCity = "Franklin", CustomerState = "TN", CustomerZipCode = "37069" };
             var customer2 = new Customer { CustomerId = 2, CustomerFirstName = "Justin", CustomerLastName = "Leggett", CustomerAddressLine1 = "123 Main Street", CustomerAddressLine2 = "Suite 1", CustomerCity = "Franklin", CustomerState = "TN", CustomerZipCode = "37069" };
