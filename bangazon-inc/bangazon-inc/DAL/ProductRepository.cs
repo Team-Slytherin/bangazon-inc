@@ -17,7 +17,7 @@ namespace bangazon_inc.DAL
         }
         public void AddProduct(Product newProduct)
         {
-            const string sql = @"INSERT into BangazonInc.dbo.Product
+            const string sql = @"INSERT into BangazonInc.dbo.Products
                         (ProductName,
                          ProductPrice)
                         VALUES
@@ -26,16 +26,22 @@ namespace bangazon_inc.DAL
             _dbConnection.Execute(sql, newProduct);
         }
 
+        public IEnumerable<string> GetAllProductCategories()
+        {
+            const string sql = @"SELECT distinct category FROM BangazonInc.dbo.Products;";
+            return _dbConnection.Query<string>(sql).ToList();
+        }
+
         public IEnumerable<Product> GetAllProducts()
         {
-            const string sql = @"SELECT * FROM BangazonInc.dbo.Product;";
+            const string sql = @"SELECT * FROM BangazonInc.dbo.Products;";
             return _dbConnection.Query<Product>(sql).ToList();
         }
 
         public Product GetOneProduct(int productId)
         {
             var sql = $@"SELECT *
-                        FROM BangazonInc.dbo.Product
+                        FROM BangazonInc.dbo.Products
                         WHERE ProductId = {productId};";
             var result = _dbConnection.Query<Product>(sql).ToList();
             return result.FirstOrDefault();
@@ -43,7 +49,7 @@ namespace bangazon_inc.DAL
 
         public void UpdateProduct(Product productToUpdate)
         {
-            const string sql = @"UPDATE Product
+            const string sql = @"UPDATE Products
                         SET ProductName to @ProductName
                             ProductPrice to @ProductPrice
                         WHERE ProductId = @ProductId";
