@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Data;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using bangazon_inc.Interfaces;
 using bangazon_inc.Models;
@@ -9,51 +10,36 @@ namespace bangazon_inc.DAL
 {
     public class ProductRepository : IProductRepository
     {
-        private readonly IDbConnection _dbConnection;
+        private readonly AppContext _context;
 
-        public ProductRepository(IDbConnection connection)
+        public ProductRepository(AppContext context)
         {
-            _dbConnection = connection;
+            _context = context;
         }
         public void AddProduct(Product newProduct)
         {
-            const string sql = @"INSERT into BangazonInc.dbo.Products
-                        (ProductName,
-                         ProductPrice)
-                        VALUES
-                        (@ProductName,
-                         @ProductPrice);";
-            _dbConnection.Execute(sql, newProduct);
+            _context.Products.Add(newProduct);
+            _context.SaveChanges();
         }
 
         public IEnumerable<string> GetAllProductCategories()
         {
-            const string sql = @"SELECT distinct category FROM BangazonInc.dbo.Products;";
-            return _dbConnection.Query<string>(sql).ToList();
+            return _context.Products.Select(x => x.Category).Distinct().ToList();
         }
 
         public IEnumerable<Product> GetAllProducts()
         {
-            const string sql = @"SELECT * FROM BangazonInc.dbo.Products;";
-            return _dbConnection.Query<Product>(sql).ToList();
+            return _context.Products;
         }
 
-        public Product GetOneProduct(int productId)
+        public IQueryable<Product> GetOneProduct(int productId)
         {
-            var sql = $@"SELECT *
-                        FROM BangazonInc.dbo.Products
-                        WHERE ProductId = {productId};";
-            var result = _dbConnection.Query<Product>(sql).ToList();
-            return result.FirstOrDefault();
+            return _context.Products.Where(x => x.Id == productId);
         }
 
         public void UpdateProduct(Product productToUpdate)
         {
-            const string sql = @"UPDATE Products
-                        SET ProductName to @ProductName
-                            ProductPrice to @ProductPrice
-                        WHERE ProductId = @ProductId";
-            _dbConnection.Execute(sql, new { productToUpdate });
+            _context.Products.AddOrUpdate(productToUpdate);
         }
     }
 }
