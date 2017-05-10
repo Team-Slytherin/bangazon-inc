@@ -71,6 +71,7 @@ namespace bangazon_inc.Migrations
                         Id = c.Int(nullable: false, identity: true),
                         Name = c.String(nullable: false),
                         Price = c.Decimal(nullable: false, precision: 18, scale: 2),
+                        Category = c.String(nullable: false),
                         Description = c.String(maxLength: 255),
                         Image = c.String(),
                         Customer_CustomerId = c.Int(nullable: false),

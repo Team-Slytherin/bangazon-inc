@@ -7,13 +7,13 @@ namespace bangazon_inc.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class addProductCategory : IMigrationMetadata
+    public sealed partial class initialCreate : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(addProductCategory));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(initialCreate));
         
         string IMigrationMetadata.Id
         {
-            get { return "201705092351039_addProductCategory"; }
+            get { return "201705100111520_initialCreate"; }
         }
         
         string IMigrationMetadata.Source
