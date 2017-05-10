@@ -11,121 +11,107 @@ using bangazon_inc.Models;
 
 namespace bangazon_inc.Controllers
 {
-    public class ProductController : Controller
+    public class PaymentController : Controller
     {
         private AppContext db = new AppContext();
 
-        private readonly AppContext _context;
-
-
-        // GET: Product
+        // GET: Payment
         public ActionResult Index()
         {
-            return View(db.Products.ToList());
+            return View(db.Payments.ToList());
         }
 
-        // GET: Product/Details/5
+        // GET: Payment/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Product product = db.Products.Find(id);
-            if (product == null)
+            Payment payment = db.Payments.Find(id);
+            if (payment == null)
             {
                 return HttpNotFound();
             }
-            return View(product);
+            return View(payment);
         }
 
-        // GET: Product/Create
+        // GET: Payment/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Product/Create
+        // POST: Payment/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,Price,Category,Description,Image")] Product product)
+        public ActionResult Create([Bind(Include = "PaymentId,PaymentName,PaymentAccountNumber")] Payment payment)
         {
-            //var payment = new Payment { PaymentId = 1, PaymentName = "Visa", PaymentAccountNumber = 12340987, Customer = customer };
-            //var customer = new Customer { CustomerId = 10, CustomerFirstName = "Taylor", CustomerLastName = "Harry", CustomerAddressLine1 = "123 Main Street", CustomerAddressLine2 = "Suite 1", CustomerCity = "Franklin", CustomerState = "TN", CustomerZipCode = "37069" };
-            //var product11 = new Product { Id = 11, Name = "iPhone", Customer = customer, Price = 99.99m, Category = "Electronics", Description = "a phone", Image = "https://d3nevzfk7ii3be.cloudfront.net/igi/ipv5OG2NckM3DfE2.large" };
-            var customer = new Customer { CustomerId = 1, CustomerFirstName = "Taylor", CustomerLastName = "Harry", CustomerAddressLine1 = "123 Main Street", CustomerAddressLine2 = "Suite 1", CustomerCity = "Franklin", CustomerState = "TN", CustomerZipCode = "37069" };
-
-            product.Customer = customer;
-            ModelState.Clear();
-            //_context.Products.Add(product);
-            //_context.SaveChanges();
             if (ModelState.IsValid)
             {
-                db.Products.Add(product);
+                db.Payments.Add(payment);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-
-
-            return View(product);
+            return View(payment);
         }
 
-        // GET: Product/Edit/5
+        // GET: Payment/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Product product = db.Products.Find(id);
-            if (product == null)
+            Payment payment = db.Payments.Find(id);
+            if (payment == null)
             {
                 return HttpNotFound();
             }
-            return View(product);
+            return View(payment);
         }
 
-        // POST: Product/Edit/5
+        // POST: Payment/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,Price,Category,Description,Image")] Product product)
+        public ActionResult Edit([Bind(Include = "PaymentId,PaymentName,PaymentAccountNumber")] Payment payment)
         {
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
             {
-                db.Entry(product).State = EntityState.Modified;
+                db.Entry(payment).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(product);
+            return View(payment);
         }
 
-        // GET: Product/Delete/5
+        // GET: Payment/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Product product = db.Products.Find(id);
-            if (product == null)
+            Payment payment = db.Payments.Find(id);
+            if (payment == null)
             {
                 return HttpNotFound();
             }
-            return View(product);
+            return View(payment);
         }
 
-        // POST: Product/Delete/5
+        // POST: Payment/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Product product = db.Products.Find(id);
-            db.Products.Remove(product);
+            Payment payment = db.Payments.Find(id);
+            db.Payments.Remove(payment);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
