@@ -28,7 +28,7 @@ namespace bangazon_inc.DAL
 
         public IEnumerable<Product> GetAllProducts()
         {
-            var sql = $@"SELECT * FROM BangazonInc.dbo.Product;";
+            const string sql = @"SELECT * FROM BangazonInc.dbo.Product;";
             return _dbConnection.Query<Product>(sql).ToList();
         }
 
