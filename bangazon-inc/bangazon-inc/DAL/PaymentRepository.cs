@@ -18,7 +18,7 @@ namespace bangazon_inc.DAL
             _appContext = appContext;
         }
 
-        public int editPayment(Payment payment)
+        public int EditPayment(Payment payment)
         {
             var updatedPayment = _appContext.Entry(payment);
             updatedPayment.State = EntityState.Modified;
@@ -30,7 +30,7 @@ namespace bangazon_inc.DAL
             return _appContext.Payments;
         }
 
-        public Payment getSinglePayment(int paymentId)
+        public Payment GetSinglePayment(int paymentId)
         {
             return _appContext.Payments.Find(paymentId);
         }

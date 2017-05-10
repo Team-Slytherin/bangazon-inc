@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace bangazon_inc.Interfaces
 {
-    interface IPaymentRepository
+    public interface IPaymentRepository
     {
-        Payment getSinglePayment(int paymentId);
+        Payment GetSinglePayment(int paymentId);
         IEnumerable<Payment> GetAllPayments();
-        int editPayment(Payment payment);
+        int EditPayment(Payment payment);
     }
 }
