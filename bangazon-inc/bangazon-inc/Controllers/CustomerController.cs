@@ -4,13 +4,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
-using System.Net.Http;
-using System.Web.Http;
+using System.Web.Mvc;
 
 namespace bangazon_inc.Controllers
 {
-    [RoutePrefix("api/customer")]
-    public class CustomerController : ApiController
+    [RoutePrefix("customer")]
+    public class CustomerController : Controller
     {
         private readonly ICustomerRepository _customerRepository;
         public CustomerController(ICustomerRepository customerRepository)
@@ -20,43 +19,55 @@ namespace bangazon_inc.Controllers
 
         [HttpGet]
         [Route("{customerId}")]
-        public HttpResponseMessage RetrieveCustomer(int customerId)
+        public ActionResult RetrieveCustomer(int customerId)
         {
             var customer = _customerRepository.GetSingleCustomer(customerId);
 
             if (customer == null)
             {
-                return Request.CreateErrorResponse(HttpStatusCode.NoContent, "No Content: Customer Does Not Exist.");
+                return HttpNotFound("No Content: Customer Does Not Exist.");
             }
 
-            return Request.CreateResponse(HttpStatusCode.OK, customer);
+            return View("CustomerDetail", customer);
         }
 
         [HttpGet]
-        public HttpResponseMessage RetrieveAllCustomers()
+        public ActionResult RetrieveAllCustomers()
         {
             var customers = _customerRepository.GetAllCustomers() as List<Customer>;
 
             if (customers == null)
             {
-                return Request.CreateErrorResponse(HttpStatusCode.NoContent, "No Content: No Customers Available.");
+                return HttpNotFound("No Content: No Customers Available.");
             }
 
-            return Request.CreateResponse(HttpStatusCode.OK, customers);
+            return View("CustomerList", customers);
+        }
+        [HttpGet]
+        [Route("{customerId}")]
+        public ActionResult RetrieveEditCustomerForm(int customerId)
+        {
+            var customer = _customerRepository.GetSingleCustomer(customerId);
+
+            if (customer == null)
+            {
+                return HttpNotFound("No Content: Customer Does Not Exist.");
+            }
+
+            return View("CustomerEdit", customer);
         }
 
         [HttpPut]
         //[Route("{customerId}")]
-        public HttpResponseMessage EditCustomer([FromBody]Customer editingCustomer)
+        public ActionResult EditCustomer (Customer customer)
         {
             if (!ModelState.IsValid)
             {
-                return Request.CreateErrorResponse(HttpStatusCode.NoContent, "No Content: Select a Valid Customer to Edit.");
+                return HttpNotFound("No Content: Select a Valid Customer to Edit.");
             }
+            var updatedCustomer = _customerRepository.EditCustomer(customer);
 
-            _customerRepository.EditCustomer(editingCustomer);
-
-            return Request.CreateResponse(HttpStatusCode.OK);
+            return View("CustomerDetail", customer);
         }
     }
 }

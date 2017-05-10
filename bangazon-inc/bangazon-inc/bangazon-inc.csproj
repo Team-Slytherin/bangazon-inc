@@ -209,12 +209,15 @@
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\PaymentController.cs" />
     <Compile Include="DAL\AppContext.cs" />
     <Compile Include="DAL\CustomerRepository.cs" />
+    <Compile Include="DAL\PaymentRepository.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Interfaces\ICustomerRepository.cs" />
+    <Compile Include="Interfaces\IPaymentRepository.cs" />
     <Compile Include="Migrations\201705090220201_initialCreate.cs" />
     <Compile Include="Migrations\201705090220201_initialCreate.Designer.cs">
       <DependentUpon>201705090220201_initialCreate.cs</DependentUpon>
@@ -293,6 +296,13 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Customer\PaymentList.cshtml" />
+    <Content Include="Views\Customer\CustomerDetail.cshtml" />
+    <Content Include="Views\Customer\CustomerInfo.cshtml" />
+    <Content Include="Views\Customer\PaymentInfo.cshtml" />
+    <Content Include="Views\Customer\CustomerInfoForm.cshtml" />
+    <Content Include="Views\Customer\CustomerEdit.cshtml" />
+    <Content Include="Views\Customer\PaymentInfoForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
