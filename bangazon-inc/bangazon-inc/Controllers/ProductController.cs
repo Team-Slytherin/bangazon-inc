@@ -15,6 +15,9 @@ namespace bangazon_inc.Controllers
     {
         private AppContext db = new AppContext();
 
+        private readonly AppContext _context;
+
+
         // GET: Product
         public ActionResult Index()
         {
@@ -49,12 +52,23 @@ namespace bangazon_inc.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,Name,Price,Category,Description,Image")] Product product)
         {
+            //var payment = new Payment { PaymentId = 1, PaymentName = "Visa", PaymentAccountNumber = 12340987, Customer = customer };
+            //var customer = new Customer { CustomerId = 10, CustomerFirstName = "Taylor", CustomerLastName = "Harry", CustomerAddressLine1 = "123 Main Street", CustomerAddressLine2 = "Suite 1", CustomerCity = "Franklin", CustomerState = "TN", CustomerZipCode = "37069" };
+            //var product11 = new Product { Id = 11, Name = "iPhone", Customer = customer, Price = 99.99m, Category = "Electronics", Description = "a phone", Image = "https://d3nevzfk7ii3be.cloudfront.net/igi/ipv5OG2NckM3DfE2.large" };
+            var customer = new Customer { CustomerId = 1, CustomerFirstName = "Taylor", CustomerLastName = "Harry", CustomerAddressLine1 = "123 Main Street", CustomerAddressLine2 = "Suite 1", CustomerCity = "Franklin", CustomerState = "TN", CustomerZipCode = "37069" };
+
+            product.Customer = customer;
+
+            //_context.Products.Add(product);
+            //_context.SaveChanges();
             if (ModelState.IsValid)
             {
                 db.Products.Add(product);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+
+
 
             return View(product);
         }
