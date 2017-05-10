@@ -245,6 +245,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Interfaces\IProductRepository.cs" />
+    <Compile Include="Migrations\201705092351039_addProductCategory.cs" />
     <Compile Include="Migrations\201705100111520_initialCreate.cs" />
     <Compile Include="Migrations\201705100111520_initialCreate.Designer.cs">
       <DependentUpon>201705100111520_initialCreate.cs</DependentUpon>
