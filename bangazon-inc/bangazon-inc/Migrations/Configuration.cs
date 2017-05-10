@@ -12,7 +12,7 @@ namespace bangazon_inc.Migrations
             AutomaticMigrationsEnabled = false;
         }
 
-        protected override void Seed(bangazon_inc.DAL.AppContext context)
+        protected override void Seed(DAL.AppContext context)
         {
             //  This method will be called after migrating to the latest version.
 
