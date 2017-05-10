@@ -10,7 +10,7 @@ namespace bangazon_inc.Interfaces
     public interface IProductRepository
     {
         void AddProduct(Product newProduct);
-        Product GetOneProduct(int productId);
+        IQueryable<Product> GetOneProduct(int productId);
         IEnumerable<Product> GetAllProducts();
         IEnumerable<string> GetAllProductCategories();
         void UpdateProduct(Product productToUpdate);
