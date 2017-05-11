@@ -8,9 +8,15 @@ namespace bangazon_inc.DAL
 {
     public class OrderDetailRepository : IOrderDetailRepository
     {
-        public void GetOrderDetail(int orderId)
+        readonly AppContext _context;
+
+        public OrderDetailRepository(AppContext context)
         {
-            throw new NotImplementedException();
+            _context = context;
+        }
+        public List<OrderDetail> GetAllOrderDetail(int orderId)
+        {
+            return _context.OrderDetails.Where(x => x.Order.OrderId == orderId).ToList();
         }
 
         public void Save(OrderDetail orderDetail)

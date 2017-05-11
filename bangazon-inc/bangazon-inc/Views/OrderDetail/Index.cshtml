@@ -4,11 +4,12 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Order Detail ahhh</h2>
-
-<div>
-    <h4>OrderDetail</h4>
-    <hr />
-    <dl class="dl-horizontal">
-    </dl>
-</div>
+<h2>Order Detail</h2>
+@{
+    for (int i = 0; i < ViewBag.OrderDetails.Count; i++)
+    {
+        <p>@ViewBag.OrderDetails[i].Product.Name</p>
+        <p>@ViewBag.OrderDetails[i].Product.Price</p>
+        <p>@ViewBag.OrderDetails[i].Product.Description</p>
+    }
+}

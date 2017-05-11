@@ -10,27 +10,18 @@ namespace bangazon_inc.Controllers
     public class OrderDetailController : Controller
     {
         readonly IOrderDetailRepository _orderDetailRepository;
-        public OrderDetailController()
-        {
-            _orderDetailRepository = new OrderDetailRepository();
-        }
+        
         public OrderDetailController(IOrderDetailRepository orderDetailRepository)
         {
             _orderDetailRepository = orderDetailRepository;
         }
-        // GET: OrderDetail
-        public ActionResult Index()
-        {
-            return View("index");
-        }
 
         // GET: OrderDetail
-        [HttpGet]
-        [Route]
         public ActionResult Order(int id)
         {
-            //_orderDetailRepository.Save(newDuck);
+            ViewBag.OrderDetails = _orderDetailRepository.GetAllOrderDetail(id);
             return View("index");
         }
+        
     }
 }

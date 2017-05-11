@@ -9,7 +9,7 @@ namespace bangazon_inc.DAL
 {
     public interface IOrderDetailRepository
     {
-        void GetOrderDetail(int orderId);
+        List<OrderDetail> GetAllOrderDetail(int orderId);
         void Save(OrderDetail orderDetail);
     }
 }
