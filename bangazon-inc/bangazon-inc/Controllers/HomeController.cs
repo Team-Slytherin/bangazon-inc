@@ -3,21 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using bangazon_inc.DAL;
 using bangazon_inc.Interfaces;
 
 namespace bangazon_inc.Controllers
 {
     public class HomeController : Controller
     {
-        readonly IProductRepository _productRepository;
+        private AppContext db = new AppContext();
 
-        public HomeController(IProductRepository productRepository)
-        {
-            _productRepository = productRepository;
-        }
+
         public ActionResult Index()
         {
-            ViewBag.Categories = _productRepository.GetAllProductCategories();
+            ViewBag.Categories = db.Categories.ToList();
             return View();
         }
 

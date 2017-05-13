@@ -14,9 +14,9 @@
         <h3>My Categories</h3>
         <ul>
             @{
-                for(var i = 0; i<ViewBag.Categories.Count; i++)
+                for (var i = 0; i < ViewBag.Categories.Count; i++)
                 {
-                    <a href="category" class="button">@ViewBag.Categories[i]</a>
+                    <li><a href="category" class="button">@ViewBag.Categories[i].CategoryName</a></li>
                 }
             }
         </ul>
