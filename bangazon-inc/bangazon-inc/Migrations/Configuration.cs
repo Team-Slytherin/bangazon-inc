@@ -1,7 +1,6 @@
-using bangazon_inc.Models;
-
 namespace bangazon_inc.Migrations
 {
+    using Models;
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
@@ -11,10 +10,10 @@ namespace bangazon_inc.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationsEnabled = true;
         }
 
-        protected override void Seed(DAL.AppContext context)
+        protected override void Seed(bangazon_inc.DAL.AppContext context)
         {
             var customer = new Customer { CustomerId = 1, CustomerFirstName = "Taylor", CustomerLastName = "Harry", CustomerAddressLine1 = "123 Main Street", CustomerAddressLine2 = "Suite 1", CustomerCity = "Franklin", CustomerState = "TN", CustomerZipCode = "37069" };
             var customer2 = new Customer { CustomerId = 2, CustomerFirstName = "Justin", CustomerLastName = "Leggett", CustomerAddressLine1 = "123 Main Street", CustomerAddressLine2 = "Suite 1", CustomerCity = "Franklin", CustomerState = "TN", CustomerZipCode = "37069" };
@@ -22,16 +21,19 @@ namespace bangazon_inc.Migrations
             var customer4 = new Customer { CustomerId = 4, CustomerFirstName = "Dustin", CustomerLastName = "Reed", CustomerAddressLine1 = "123 Main Street", CustomerAddressLine2 = "Suite 1", CustomerCity = "Franklin", CustomerState = "TN", CustomerZipCode = "37069" };
             var customer5 = new Customer { CustomerId = 5, CustomerFirstName = "Debgra", CustomerLastName = "Gordon", CustomerAddressLine1 = "123 Main Street", CustomerAddressLine2 = "Suite 1", CustomerCity = "Franklin", CustomerState = "TN", CustomerZipCode = "37069" };
 
-            var product = new Product { Id = 1, Name = "iPhone", Customer = customer, Price = 99.99m, Category = "Electronics", Description = "a phone", Image = "https://d3nevzfk7ii3be.cloudfront.net/igi/ipv5OG2NckM3DfE2.large" };
-            var product2 = new Product { Id = 2, Name = "iPhone", Customer = customer, Price = 99.99m, Category = "Electronics", Description = "a phone", Image = "https://d3nevzfk7ii3be.cloudfront.net/igi/ipv5OG2NckM3DfE2.large" };
-            var product3 = new Product { Id = 3, Name = "iPhone", Customer = customer, Price = 99.99m, Category = "Electronics", Description = "a phone", Image = "https://d3nevzfk7ii3be.cloudfront.net/igi/ipv5OG2NckM3DfE2.large" };
-            var product4 = new Product { Id = 4, Name = "iPhone", Customer = customer, Price = 99.99m, Category = "Electronics", Description = "a phone", Image = "https://d3nevzfk7ii3be.cloudfront.net/igi/ipv5OG2NckM3DfE2.large" };
-            var product5 = new Product { Id = 5, Name = "iPhone", Customer = customer, Price = 99.99m, Category = "Electronics", Description = "a phone", Image = "https://d3nevzfk7ii3be.cloudfront.net/igi/ipv5OG2NckM3DfE2.large" };
-            var product6 = new Product { Id = 6, Name = "iPhone", Customer = customer, Price = 99.99m, Category = "Electronics", Description = "a phone", Image = "https://d3nevzfk7ii3be.cloudfront.net/igi/ipv5OG2NckM3DfE2.large" };
-            var product7 = new Product { Id = 7, Name = "iPhone", Customer = customer, Price = 99.99m, Category = "Electronics", Description = "a phone", Image = "https://d3nevzfk7ii3be.cloudfront.net/igi/ipv5OG2NckM3DfE2.large" };
-            var product8 = new Product { Id = 8, Name = "iPhone", Customer = customer, Price = 99.99m, Category = "Electronics", Description = "a phone", Image = "https://d3nevzfk7ii3be.cloudfront.net/igi/ipv5OG2NckM3DfE2.large" };
-            var product9 = new Product { Id = 9, Name = "iPhone", Customer = customer, Price = 99.99m, Category = "Electronics", Description = "a phone", Image = "https://d3nevzfk7ii3be.cloudfront.net/igi/ipv5OG2NckM3DfE2.large" };
-            var product10 = new Product { Id = 10, Name = "iPhone", Customer = customer, Price = 99.99m, Category = "Electronics", Description = "a phone", Image = "https://d3nevzfk7ii3be.cloudfront.net/igi/ipv5OG2NckM3DfE2.large" };
+            var category = new Category {CategoryName = "Electronic", CategoryId = 2};
+            var category1 = new Category { CategoryName = "IceCream", CategoryId = 2 };
+
+            var product = new Product { ProductId = 1, Name = "iPhone", Customer = customer, Price = 99.99m, Category = category, Description = "a phone", Image = "https://d3nevzfk7ii3be.cloudfront.net/igi/ipv5OG2NckM3DfE2.large" };
+            var product2 = new Product { ProductId = 2, Name = "iPhone", Customer = customer, Price = 99.99m, Category = category, Description = "a phone", Image = "https://d3nevzfk7ii3be.cloudfront.net/igi/ipv5OG2NckM3DfE2.large" };
+            var product3 = new Product { ProductId = 3, Name = "iPhone", Customer = customer, Price = 99.99m, Category = category, Description = "a phone", Image = "https://d3nevzfk7ii3be.cloudfront.net/igi/ipv5OG2NckM3DfE2.large" };
+            var product4 = new Product { ProductId = 4, Name = "iPhone", Customer = customer, Price = 99.99m, Category = category, Description = "a phone", Image = "https://d3nevzfk7ii3be.cloudfront.net/igi/ipv5OG2NckM3DfE2.large" };
+            var product5 = new Product { ProductId = 5, Name = "iPhone", Customer = customer, Price = 99.99m, Category = category, Description = "a phone", Image = "https://d3nevzfk7ii3be.cloudfront.net/igi/ipv5OG2NckM3DfE2.large" };
+            var product6 = new Product { ProductId = 6, Name = "iPhone", Customer = customer, Price = 99.99m, Category = category1, Description = "a phone", Image = "https://d3nevzfk7ii3be.cloudfront.net/igi/ipv5OG2NckM3DfE2.large" };
+            var product7 = new Product { ProductId = 7, Name = "iPhone", Customer = customer, Price = 99.99m, Category = category1, Description = "a phone", Image = "https://d3nevzfk7ii3be.cloudfront.net/igi/ipv5OG2NckM3DfE2.large" };
+            var product8 = new Product { ProductId = 8, Name = "iPhone", Customer = customer, Price = 99.99m, Category = category1, Description = "a phone", Image = "https://d3nevzfk7ii3be.cloudfront.net/igi/ipv5OG2NckM3DfE2.large" };
+            var product9 = new Product { ProductId = 9, Name = "iPhone", Customer = customer, Price = 99.99m, Category = category1, Description = "a phone", Image = "https://d3nevzfk7ii3be.cloudfront.net/igi/ipv5OG2NckM3DfE2.large" };
+            var product10 = new Product { ProductId = 10, Name = "iPhone", Customer = customer, Price = 99.99m, Category = category1, Description = "a phone", Image = "https://d3nevzfk7ii3be.cloudfront.net/igi/ipv5OG2NckM3DfE2.large" };
 
             var payment = new Payment { PaymentId = 1, PaymentName = "Visa", PaymentAccountNumber = 12340987, Customer = customer };
             var payment2 = new Payment { PaymentId = 2, PaymentName = "Visa", PaymentAccountNumber = 12340987, Customer = customer2 };
@@ -75,7 +77,6 @@ namespace bangazon_inc.Migrations
             context.OrderDetails.AddOrUpdate(
                 orderdetail, orderdetail2, orderdetail3, orderdetail4, orderdetail5, orderdetail6, orderdetail7, orderdetail8, orderdetail9, orderdetail10
             );
-
         }
     }
 }

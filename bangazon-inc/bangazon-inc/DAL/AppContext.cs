@@ -19,5 +19,7 @@ namespace bangazon_inc.DAL
        public DbSet<OrderDetail> OrderDetails { get; set; }
        public DbSet<Payment> Payments { get; set; }
        public DbSet<Product> Products { get; set; }
+       public DbSet<Category> Categories { get; set; }
+
     }
 }
