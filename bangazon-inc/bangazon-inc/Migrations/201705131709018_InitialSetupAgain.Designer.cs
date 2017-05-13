@@ -7,13 +7,13 @@ namespace bangazon_inc.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class initialCreate : IMigrationMetadata
+    public sealed partial class InitialSetupAgain : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(initialCreate));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(InitialSetupAgain));
         
         string IMigrationMetadata.Id
         {
-            get { return "201705100111520_initialCreate"; }
+            get { return "201705131709018_InitialSetupAgain"; }
         }
         
         string IMigrationMetadata.Source

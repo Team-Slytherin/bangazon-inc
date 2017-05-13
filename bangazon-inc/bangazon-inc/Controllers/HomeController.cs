@@ -34,5 +34,12 @@ namespace bangazon_inc.Controllers
 
             return View();
         }
+
+        public ActionResult Category()
+        {
+            ViewBag.Message = "Your contact page.";
+
+            return View();
+        }
     }
 }
