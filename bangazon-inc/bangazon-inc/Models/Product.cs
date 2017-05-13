@@ -5,7 +5,7 @@ namespace bangazon_inc.Models
     public class Product
     {
         [Key]
-        public int Id { get; set; }
+        public int ProductId { get; set; }
         [Required]
         public virtual Customer Customer { get; set; }
         [Required]
@@ -13,7 +13,7 @@ namespace bangazon_inc.Models
         [Required]
         public decimal Price { get; set; }
         [Required]
-        public string Category  { get; set; }  
+        public virtual Category Category  { get; set; }  
         [MaxLength(255)]
         public string Description { get; set; }
         public string Image { get; set; }

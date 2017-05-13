@@ -12,7 +12,7 @@ namespace bangazon_inc.Interfaces
         void AddProduct(Product newProduct);
         IQueryable<Product> GetOneProduct(int productId);
         IEnumerable<Product> GetAllProducts();
-        IEnumerable<string> GetAllProductCategories();
+        IEnumerable<Category> GetAllProductCategories();
         void UpdateProduct(Product productToUpdate);
     }
 }

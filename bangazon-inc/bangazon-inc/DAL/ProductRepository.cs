@@ -22,9 +22,9 @@ namespace bangazon_inc.DAL
             _context.SaveChanges();
         }
 
-        public IEnumerable<string> GetAllProductCategories()
+        public IEnumerable<Category> GetAllProductCategories()
         {
-            return _context.Products.Select(x => x.Category).Distinct().ToList();
+            return _context.Categories.ToList();
         }
 
         public IEnumerable<Product> GetAllProducts()
@@ -34,7 +34,7 @@ namespace bangazon_inc.DAL
 
         public IQueryable<Product> GetOneProduct(int productId)
         {
-            return _context.Products.Where(x => x.Id == productId);
+            return _context.Products.Where(x => x.ProductId == productId);
         }
 
         public void UpdateProduct(Product productToUpdate)

@@ -267,13 +267,13 @@
     </Compile>
     <Compile Include="Interfaces\IOrderRepository.cs" />
     <Compile Include="Interfaces\IProductRepository.cs" />
-    <Compile Include="Migrations\201705092351039_addProductCategory.cs" />
-    <Compile Include="Migrations\201705100111520_initialCreate.cs" />
-    <Compile Include="Migrations\201705100111520_initialCreate.Designer.cs">
-      <DependentUpon>201705100111520_initialCreate.cs</DependentUpon>
+    <Compile Include="Migrations\201705131709018_InitialSetupAgain.cs" />
+    <Compile Include="Migrations\201705131709018_InitialSetupAgain.Designer.cs">
+      <DependentUpon>201705131709018_InitialSetupAgain.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -378,8 +378,8 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201705100111520_initialCreate.resx">
-      <DependentUpon>201705100111520_initialCreate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201705131709018_InitialSetupAgain.resx">
+      <DependentUpon>201705131709018_InitialSetupAgain.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
