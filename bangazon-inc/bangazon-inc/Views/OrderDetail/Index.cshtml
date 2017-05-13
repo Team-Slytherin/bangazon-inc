@@ -1,27 +1,43 @@
-﻿@model IEnumerable<bangazon_inc.Models.OrderDetail>
+﻿@model bangazon_inc.Models.OrderDetail
 
 @{
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Order Details</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 <table class="table">
     <tr>
-        <th></th>
+        <th>Product Id</th>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Description</th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.OrderDetailId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.OrderDetailId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.OrderDetailId })
-        </td>
-    </tr>
-}
+    @for (int i = 0; i < ViewBag.OrderDetails.Count; i++)
+    {
+        <tr>
+            <td>
+                @ViewBag.OrderDetails[i].Product.Id
+            </td>
+            <td>
+                @ViewBag.OrderDetails[i].Product.Name
+            </td>
+            <td>
+                @ViewBag.OrderDetails[i].Product.Price
+            </td>
+            <td>
+                @ViewBag.OrderDetails[i].Product.Description
+            </td>
+            <td>
+                @Html.ActionLink("Details", "Details", new { id = ViewBag.OrderDetails[i].Product.Id }) |
+            </td>
+        </tr>
+    }
 
 </table>
+
+<p>
+    @Html.ActionLink("Checkout", "Checkout") |
+    @Html.ActionLink("Add product", "Index")
+</p>

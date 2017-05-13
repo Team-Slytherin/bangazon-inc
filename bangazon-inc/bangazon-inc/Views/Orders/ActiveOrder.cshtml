@@ -1,0 +1,25 @@
+﻿
+@{
+    ViewBag.Title = "ActiveOrder";
+}
+
+<h2>Active Order</h2>
+
+<table class="table">
+    <tr>
+        <th>Order Id</th>
+    </tr>
+
+    <tr>
+        <td>
+            @ViewBag.activeOrder.OrderId
+        </td>
+    </tr>
+</table>
+
+<p>
+    @Html.ActionLink("Details", "Order", "OrderDetail", new { id = ViewBag.activeOrder.OrderId }, null) |
+    @Html.ActionLink("Checkout", "Checkout") |
+    @Html.ActionLink("Add product", "Index")
+</p>
+
