@@ -25,9 +25,9 @@ namespace bangazon_inc.DAL
             throw new NotImplementedException();
         }
 
-        public void GetActiveOrder(Customer customer)
+        public Order GetActiveOrder(Customer customer)
         {
-            throw new NotImplementedException();
+            return _context.Orders.Where(x => x.Customer.CustomerId == customer.CustomerId).FirstOrDefault();
         }
 
         public void InitOrder(Customer customer)

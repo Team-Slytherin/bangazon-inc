@@ -12,7 +12,10 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.OrderActive)
+            Order Id
+        </th>
+        <th>
+            Active Status
         </th>
         <th></th>
     </tr>
@@ -20,12 +23,22 @@
 @foreach (var item in Model) {
     <tr>
         <td>
+            @Html.DisplayFor(modelItem => item.OrderId)
+        </td>
+        <td>
             @Html.DisplayFor(modelItem => item.OrderActive)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.OrderId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.OrderId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.OrderId })
+            @if (item.OrderActive == "1")
+            {
+            @Html.ActionLink("Edit", "Edit", new { id = item.OrderId })
+            }
+            else
+            {
+                <text>NA</text>
+            }
+             |
+            @Html.ActionLink("Details", "Details", new { id=item.OrderId })
         </td>
     </tr>
 }

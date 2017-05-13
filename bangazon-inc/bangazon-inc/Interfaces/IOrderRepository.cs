@@ -10,7 +10,7 @@ namespace bangazon_inc.Interfaces
     public interface IOrderRepository
     {
         void InitOrder(Customer customer);
-        void GetActiveOrder(Customer customer);
+        Order GetActiveOrder(Customer customer);
         void FinishOrder(Customer customer);
         void EmptyOrder(Customer customer);
     }

@@ -8,12 +8,19 @@ using System.Web;
 using System.Web.Mvc;
 using bangazon_inc.DAL;
 using bangazon_inc.Models;
+using bangazon_inc.Interfaces;
 
 namespace bangazon_inc.Controllers
 {
     public class OrdersController : Controller
     {
         private AppContext db = new AppContext();
+        readonly IOrderRepository _orderRepository;
+
+        public OrdersController(IOrderRepository orderRepository)
+        {
+            _orderRepository = orderRepository;
+        }
 
         // GET: Orders
         public ActionResult Index()
@@ -21,19 +28,22 @@ namespace bangazon_inc.Controllers
             return View(db.Orders.ToList());
         }
 
-        // GET: Orders/Details/5
-        public ActionResult Details(int? id)
+        // GET: ActiveOrder
+        public ActionResult ActiveOrder()
+        {
+            MyGlobalVariables.activeCustomer = db.Customers.Find(3);
+            ViewBag.activeOrder = _orderRepository.GetActiveOrder(MyGlobalVariables.activeCustomer);
+            return View("ActiveOrder");
+        }
+
+        // GET: Orders/s/5
+        public ActionResult s(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Order order = db.Orders.Find(id);
-            if (order == null)
-            {
-                return HttpNotFound();
-            }
-            return View(order);
+            return RedirectToAction("Order", "Order", new { id = id});
         }
 
         // GET: Orders/Create
