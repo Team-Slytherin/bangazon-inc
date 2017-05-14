@@ -45,7 +45,7 @@ namespace bangazon_inc.Controllers
         }
 
 
-        // GET: Products/Create
+        //// GET: Products/Create
         public ActionResult Create()
         {
             Product product = new Product();
