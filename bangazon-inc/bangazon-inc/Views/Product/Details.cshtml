@@ -3,7 +3,7 @@
 @{
     ViewBag.Title = "Details";
 }
-@Html.Partial("HeaderPartial")
+
 <h2>Details</h2>
 
 <div>
@@ -24,14 +24,6 @@
 
         <dd>
             @Html.DisplayFor(model => model.Price)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Category)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Category)
         </dd>
 
         <dt>
@@ -56,4 +48,3 @@
     @Html.ActionLink("Edit", "Edit", new { id = Model.ProductId }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
-@Html.Partial("FooterPartial")

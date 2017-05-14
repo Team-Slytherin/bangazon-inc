@@ -6,7 +6,6 @@ namespace bangazon_inc.Models
     {
         [Key]
         public int ProductId { get; set; }
-        [Required]
         public virtual Customer Customer { get; set; }
         [Required]
         public string Name { get; set; }

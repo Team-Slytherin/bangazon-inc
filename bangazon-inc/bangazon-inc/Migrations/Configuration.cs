@@ -21,7 +21,7 @@ namespace bangazon_inc.Migrations
             var customer4 = new Customer { CustomerId = 4, CustomerFirstName = "Dustin", CustomerLastName = "Reed", CustomerAddressLine1 = "123 Main Street", CustomerAddressLine2 = "Suite 1", CustomerCity = "Franklin", CustomerState = "TN", CustomerZipCode = "37069" };
             var customer5 = new Customer { CustomerId = 5, CustomerFirstName = "Debgra", CustomerLastName = "Gordon", CustomerAddressLine1 = "123 Main Street", CustomerAddressLine2 = "Suite 1", CustomerCity = "Franklin", CustomerState = "TN", CustomerZipCode = "37069" };
 
-            var category = new Category {CategoryName = "Electronic", CategoryId = 2};
+            var category = new Category { CategoryName = "Electronic", CategoryId = 2 };
             var category1 = new Category { CategoryName = "IceCream", CategoryId = 2 };
 
             var product = new Product { ProductId = 1, Name = "iPhone", Customer = customer, Price = 99.99m, Category = category, Description = "a phone", Image = "https://d3nevzfk7ii3be.cloudfront.net/igi/ipv5OG2NckM3DfE2.large" };

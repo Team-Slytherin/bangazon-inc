@@ -3,7 +3,7 @@
 @{
     ViewBag.Title = "Index";
 }
-@Html.Partial("HeaderPartial")
+
 <h2>Index</h2>
 
 <p>
@@ -16,9 +16,6 @@
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Price)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Category)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Description)
@@ -38,9 +35,6 @@
             @Html.DisplayFor(modelItem => item.Price)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Category)
-        </td>
-        <td>
             @Html.DisplayFor(modelItem => item.Description)
         </td>
         <td>
@@ -55,4 +49,3 @@
 }
 
 </table>
-@Html.Partial("FooterPartial")

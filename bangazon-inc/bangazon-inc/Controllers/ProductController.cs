@@ -15,9 +15,6 @@ namespace bangazon_inc.Controllers
     {
         private AppContext db = new AppContext();
 
-        private readonly AppContext _context;
-
-
         // GET: Product
         public ActionResult Index()
         {
@@ -50,25 +47,14 @@ namespace bangazon_inc.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,Price,Category,Description,Image")] Product product)
+        public ActionResult Create([Bind(Include = "ProductId,Name,Price,Description,Image")] Product product)
         {
-            //var payment = new Payment { PaymentId = 1, PaymentName = "Visa", PaymentAccountNumber = 12340987, Customer = customer };
-            //var customer = new Customer { CustomerId = 10, CustomerFirstName = "Taylor", CustomerLastName = "Harry", CustomerAddressLine1 = "123 Main Street", CustomerAddressLine2 = "Suite 1", CustomerCity = "Franklin", CustomerState = "TN", CustomerZipCode = "37069" };
-            //var product11 = new Product { Id = 11, Name = "iPhone", Customer = customer, Price = 99.99m, Category = "Electronics", Description = "a phone", Image = "https://d3nevzfk7ii3be.cloudfront.net/igi/ipv5OG2NckM3DfE2.large" };
-            var customer = new Customer { CustomerId = 1, CustomerFirstName = "Taylor", CustomerLastName = "Harry", CustomerAddressLine1 = "123 Main Street", CustomerAddressLine2 = "Suite 1", CustomerCity = "Franklin", CustomerState = "TN", CustomerZipCode = "37069" };
-
-            product.Customer = customer;
-            ModelState.Clear();
-            //_context.Products.Add(product);
-            //_context.SaveChanges();
             if (ModelState.IsValid)
             {
                 db.Products.Add(product);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
-
 
             return View(product);
         }
@@ -93,9 +79,9 @@ namespace bangazon_inc.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,Price,Category,Description,Image")] Product product)
+        public ActionResult Edit([Bind(Include = "ProductId,Name,Price,Description,Image")] Product product)
         {
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 db.Entry(product).State = EntityState.Modified;
                 db.SaveChanges();
@@ -125,6 +111,13 @@ namespace bangazon_inc.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Product product = db.Products.Find(id);
+
+            // fake logged in user
+            //var customer = new Customer { CustomerId = 1, CustomerFirstName = "Taylor", CustomerLastName = "Harry", CustomerAddressLine1 = "123 Main Street", CustomerAddressLine2 = "Suite 1", CustomerCity = "Franklin", CustomerState = "TN", CustomerZipCode = "37069" };
+            //product.Customer = customer;
+            //// add a category
+            //var category = new Category { CategoryName = "Electronics", CategoryId = 1};
+            //product.Category = category;
             db.Products.Remove(product);
             db.SaveChanges();
             return RedirectToAction("Index");
