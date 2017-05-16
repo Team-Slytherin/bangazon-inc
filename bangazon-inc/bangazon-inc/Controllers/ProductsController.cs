@@ -93,13 +93,11 @@ namespace bangazon_inc.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,Name,Price,Category,Description,Image")] Product product)
         {
-            if (ModelState.IsValid)
-            {
-                db.Entry(product).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(product);
+            product.Customer = db.Customers.Find(2);
+            product.ProductId = 1;
+            db.Entry(product).State = EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction("Index");
         }
 
         // GET: Products/Delete/5
@@ -122,7 +120,11 @@ namespace bangazon_inc.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
+
             Product product = db.Products.Find(id);
+            product.Customer = db.Customers.Find(2);
+
+
             db.Products.Remove(product);
             db.SaveChanges();
             return RedirectToAction("Index");
