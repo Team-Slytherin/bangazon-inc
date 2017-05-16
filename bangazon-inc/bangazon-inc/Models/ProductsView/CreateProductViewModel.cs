@@ -14,9 +14,6 @@ namespace bangazon_inc.Models.ProductsView
         [Key]
         public int ProductViewId { get; set; }
         [DisplayName("Which Category")]
-        public List<SelectListItem> Categories { get; set; }
-        [DisplayName("Which Customer")]
-        public List<SelectListItem> Customers { get; set; }
         [Required]
         public string Name { get; set; }
         [Required]
@@ -24,6 +21,9 @@ namespace bangazon_inc.Models.ProductsView
         [MaxLength(255)]
         public string Description { get; set; }
         public string Image { get; set; }
+        public List<SelectListItem> Categories { get; set; }
+        [DisplayName("Which Customer")]
+        public List<SelectListItem> Customers { get; set; }
 
     }
 }
