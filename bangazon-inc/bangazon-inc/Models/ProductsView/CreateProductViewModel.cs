@@ -10,10 +10,7 @@ namespace bangazon_inc.Models.ProductsView
 {
     public class CreateProductViewModel
     {
-        [DisplayName("Which ProductViewId")]
-        [Key]
-        public int ProductViewId { get; set; }
-        [DisplayName("Which Category")]
+        [DisplayName("Product Name")]
         [Required]
         public string Name { get; set; }
         [Required]
@@ -21,8 +18,9 @@ namespace bangazon_inc.Models.ProductsView
         [MaxLength(255)]
         public string Description { get; set; }
         public string Image { get; set; }
+        public int CategoryId { get; set; }
+        public int CustomerId { get; set; }
         public List<SelectListItem> Categories { get; set; }
-        [DisplayName("Which Customer")]
         public List<SelectListItem> Customers { get; set; }
 
     }

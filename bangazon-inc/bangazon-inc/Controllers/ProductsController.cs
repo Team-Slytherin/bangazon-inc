@@ -22,8 +22,7 @@ namespace bangazon_inc.Controllers
             var viewModel = new CreateProductViewModel
             {
                 Categories = categories.Select(x => new SelectListItem { Text = x.CategoryName, Value = x.CategoryId.ToString() }).ToList(),
-                //Customers = customers.Select(x => new SelectListItem { Text = x.CustomerFirstName + "" + x.CustomerLastName, Value = x.CustomerId.ToString() }).ToList(),
-                ProductViewId = 2
+                Customers = customers.Select(x => new SelectListItem { Text = x.CustomerFirstName + "" + x.CustomerLastName, Value = x.CustomerId.ToString() }).ToList()
             };
 
             return View(viewModel);
@@ -34,14 +33,16 @@ namespace bangazon_inc.Controllers
         {
             var res = new Product
             {
-                
+                Category = db.Categories.Find(product.CategoryId),
+                Description = product.Description,
+                Customer = db.Customers.Find(product.CustomerId),
+                Image = product.Image,
+                Name = product.Name,
+                Price = product.Price
             };
 
-            res.Category = db.Categories.Find(product.ProductViewId);
-
-
             db.Products.Add(res);
-
+            db.SaveChanges();
             return RedirectToAction("Index");
         }
     }
