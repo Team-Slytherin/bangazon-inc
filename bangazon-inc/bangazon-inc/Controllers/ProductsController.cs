@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
 using System.Linq;
-using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using bangazon_inc.DAL;
+using bangazon_inc.Migrations;
 using bangazon_inc.Models;
+using bangazon_inc.Models.ProductsView;
 
 namespace bangazon_inc.Controllers
 {
@@ -18,123 +17,33 @@ namespace bangazon_inc.Controllers
         // GET: Products
         public ActionResult Index()
         {
-            return View(db.Products.ToList());
-        }
-
-        // GET: Products/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
+            var categories = db.Categories.ToList();
+            var customers = db.Customers.ToList();
+            var viewModel = new CreateProductViewModel
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Product product = db.Products.Find(id);
-            if (product == null)
-            {
-                return HttpNotFound();
-            }
-            return View(product);
+                Categories = categories.Select(x => new SelectListItem { Text = x.CategoryName, Value = x.CategoryId.ToString() }).ToList(),
+                Customers = customers.Select(x => new SelectListItem { Text = x.CustomerFirstName + "" + x.CustomerLastName, Value = x.CustomerId.ToString() }).ToList()
+            };
+
+            return View(viewModel);
         }
 
-        // GET: Products/Category/5
-        public ActionResult Category(int? id)
-        {
-
-            ViewBag.Products = db.Products.Where(x => x.Category.CategoryId == id).ToList();
-            return View();
-        }
-
-
-        // GET: Products/Create
-        public ActionResult Create()
-        {
-            Product product = new Product();
-            product.Customer = db.Customers.Find(2);
-            product.Category = db.Categories.Find(2);
-            return View(product);
-        }
-
-        // POST: Products/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,Price,Category,Description,Image,Customer")] Product product)
+        public ActionResult CreateProduct(CreateProductViewModel product)
         {
-            if (ModelState.IsValid)
+            var res = new Product
             {
-                db.Products.Add(product);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+                Category = db.Categories.Find(product.CategoryId),
+                Description = product.Description,
+                Customer = db.Customers.Find(product.CustomerId),
+                Image = product.Image,
+                Name = product.Name,
+                Price = product.Price
+            };
 
-            return View(product);
-        }
-
-        // GET: Products/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Product product = db.Products.Find(id);
-            if (product == null)
-            {
-                return HttpNotFound();
-            }
-            return View(product);
-        }
-
-        // POST: Products/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,Price,Category,Description,Image")] Product product)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(product).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(product);
-        }
-
-        // GET: Products/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Product product = db.Products.Find(id);
-            if (product == null)
-            {
-                return HttpNotFound();
-            }
-            return View(product);
-        }
-
-        // POST: Products/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            Product product = db.Products.Find(id);
-            db.Products.Remove(product);
+            db.Products.Add(res);
             db.SaveChanges();
             return RedirectToAction("Index");
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
         }
     }
 }
