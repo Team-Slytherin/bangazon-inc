@@ -11,9 +11,7 @@ namespace bangazon_inc.Models
     {
         [Key]
         public int OrderDetailId { get; set; }
-        [Required]
         public virtual Order Order { get; set; }
-        [Required]
         public virtual Product Product{ get; set; }
     }
 }

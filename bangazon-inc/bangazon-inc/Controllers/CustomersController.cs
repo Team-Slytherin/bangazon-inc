@@ -1,128 +1,97 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
+using System.Data.Entity.Migrations;
 using System.Linq;
-using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using bangazon_inc.DAL;
+using bangazon_inc.Migrations;
 using bangazon_inc.Models;
+using bangazon_inc.Models.ProductsView;
 
 namespace bangazon_inc.Controllers
 {
     public class CustomersController : Controller
     {
-        private AppContext db = new AppContext();
+        private readonly AppContext _db;
 
-        // GET: Customers
+        public CustomersController(AppContext db)
+        {
+            _db = db;
+        }
+
+        // GET: show all Customers in a list
         public ActionResult Index()
         {
-            return View(db.Customers.ToList());
+            return View(_db.Customers);
         }
 
-        // GET: Customers/Details/5
-        public ActionResult Details(int? id)
+        // show single customer (detail view)
+        public ActionResult Details(int id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Customer customer = db.Customers.Find(id);
-            if (customer == null)
-            {
-                return HttpNotFound();
-            }
-            return View(customer);
+            return View(_db.Customers.Find(id));
         }
 
-        // GET: Customers/Create
+        // show single customer (edit view)
+        public ActionResult Edit(int id)
+        {
+            return View(_db.Customers.Find(id));
+        }
+        // show single customer (add view)
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Customers/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // ADD new customer to the DB
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "CustomerId,CustomerFirstName,CustomerLastName,CustomerAddressLine1,CustomerAddressLine2,CustomerCity,CustomerState,CustomerZipCode")] Customer customer)
+        public ActionResult Create(CreateCustomerViewModel customer)
         {
-            if (ModelState.IsValid)
+            var newCustomer = new Customer
             {
-                db.Customers.Add(customer);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+                CustomerFirstName = customer.FirstName,
+                CustomerLastName = customer.LastName,
+                CustomerAddressLine1 = customer.AddressLine1,
+                CustomerAddressLine2 = customer.AddressLine2,
+                CustomerCity = customer.City,
+                CustomerState = customer.State,
+                CustomerZipCode = customer.ZipCode
+            };
 
-            return View(customer);
-        }
-
-        // GET: Customers/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Customer customer = db.Customers.Find(id);
-            if (customer == null)
-            {
-                return HttpNotFound();
-            }
-            return View(customer);
-        }
-
-        // POST: Customers/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "CustomerId,CustomerFirstName,CustomerLastName,CustomerAddressLine1,CustomerAddressLine2,CustomerCity,CustomerState,CustomerZipCode")] Customer customer)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(customer).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(customer);
-        }
-
-        // GET: Customers/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Customer customer = db.Customers.Find(id);
-            if (customer == null)
-            {
-                return HttpNotFound();
-            }
-            return View(customer);
-        }
-
-        // POST: Customers/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            Customer customer = db.Customers.Find(id);
-            db.Customers.Remove(customer);
-            db.SaveChanges();
+            _db.Customers.Add(newCustomer);
+            _db.SaveChanges();
             return RedirectToAction("Index");
         }
 
-        protected override void Dispose(bool disposing)
+        // Edit existing customer to the DB
+        [HttpPost]
+        public ActionResult Edit(CreateCustomerViewModel customer)
         {
-            if (disposing)
+            var editedCustomer = new Customer
             {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
+                CustomerFirstName = customer.FirstName,
+                CustomerLastName = customer.LastName,
+                CustomerAddressLine1 = customer.AddressLine1,
+                CustomerAddressLine2 = customer.AddressLine2,
+                CustomerCity = customer.City,
+                CustomerState = customer.State,
+                CustomerZipCode = customer.ZipCode
+            };
+
+            _db.Customers.AddOrUpdate(editedCustomer);
+            _db.SaveChanges();
+            return RedirectToAction("Index");
         }
+        
+        // DELETE existing customer from the DB 
+        [HttpGet]
+        public ActionResult Delete(int id)
+        {
+            var customerToDelete = _db.Customers.Find(id);
+            _db.Customers.Remove(customerToDelete);
+            _db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
     }
 }

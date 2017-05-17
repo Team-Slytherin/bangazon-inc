@@ -270,9 +270,22 @@
     <Compile Include="Migrations\201705131709018_InitialSetupAgain.Designer.cs">
       <DependentUpon>201705131709018_InitialSetupAgain.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201705170125235_cascadeRelationships.cs" />
+    <Compile Include="Migrations\201705170125235_cascadeRelationships.Designer.cs">
+      <DependentUpon>201705170125235_cascadeRelationships.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201705170129399_removedRequired.cs" />
+    <Compile Include="Migrations\201705170129399_removedRequired.Designer.cs">
+      <DependentUpon>201705170129399_removedRequired.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201705170131289_removedMoreRequired.cs" />
+    <Compile Include="Migrations\201705170131289_removedMoreRequired.Designer.cs">
+      <DependentUpon>201705170131289_removedMoreRequired.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Category.cs" />
+    <Compile Include="Models\CreateCustomerViewModel.cs" />
     <Compile Include="Models\ProductsView\CreateProductViewModel.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -381,6 +394,15 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201705131709018_InitialSetupAgain.resx">
       <DependentUpon>201705131709018_InitialSetupAgain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705170125235_cascadeRelationships.resx">
+      <DependentUpon>201705170125235_cascadeRelationships.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705170129399_removedRequired.resx">
+      <DependentUpon>201705170129399_removedRequired.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705170131289_removedMoreRequired.resx">
+      <DependentUpon>201705170131289_removedMoreRequired.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

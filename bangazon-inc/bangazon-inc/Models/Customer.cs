@@ -23,5 +23,8 @@ namespace bangazon_inc.Models
         public string CustomerState { get; set; }
         [Required, StringLength(5)]
         public string CustomerZipCode { get; set; }
+        public virtual List<Order> Orders { get; set; }
+        public virtual List<Payment> Payments { get; set; }
+        public virtual List<Product> Products { get; set; }
     }
 }

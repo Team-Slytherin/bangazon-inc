@@ -9,10 +9,10 @@ namespace bangazon_inc.Models
         [Key]
         public int PaymentId { get; set; }
         [Required]
-        public virtual Customer Customer { get; set; }
-        [Required]
         public string PaymentName { get; set; }
         [Required]
         public int PaymentAccountNumber { get; set; }
+
+        public virtual Customer Customer { get; set; }
     }
 }
