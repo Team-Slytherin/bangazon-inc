@@ -16,7 +16,7 @@
             @{
                 for (var i = 0; i < ViewBag.Categories.Count; i++)
                 {
-                    <li><a href="category" class="button">@ViewBag.Categories[i].CategoryName</a></li>
+                    <li><a href="/products/category/@ViewBag.Categories[i].CategoryId" class="button">@ViewBag.Categories[i].CategoryName</a></li>
                 }
             }
         </ul>

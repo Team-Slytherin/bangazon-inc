@@ -18,19 +18,19 @@
     {
         <tr>
             <td>
-                @ViewBag.OrderDetails[i].Product.Id
+                @ViewBag.OrderDetails[i].Products.Id
             </td>
             <td>
-                @ViewBag.OrderDetails[i].Product.Name
+                @ViewBag.OrderDetails[i].Products.Name
             </td>
             <td>
-                @ViewBag.OrderDetails[i].Product.Price
+                @ViewBag.OrderDetails[i].Products.Price
             </td>
             <td>
-                @ViewBag.OrderDetails[i].Product.Description
+                @ViewBag.OrderDetails[i].Products.Description
             </td>
             <td>
-                @Html.ActionLink("Details", "Details", new { id = ViewBag.OrderDetails[i].Product.Id }) |
+                @Html.ActionLink("Details", "Details", new { id = ViewBag.OrderDetails[i].Products.Id }) |
             </td>
         </tr>
     }

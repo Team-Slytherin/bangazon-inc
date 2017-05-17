@@ -49,7 +49,11 @@ namespace bangazon_inc.Controllers
         // GET: Orders/Create
         public ActionResult Create()
         {
-            return View();
+            Order order = new Order();
+            order.Customer = db.Customers.Find(2);
+            order.Payment = db.Payments.Find(2);
+            order.Payment.Customer = order.Customer;
+            return View(order);
         }
 
         // POST: Orders/Create
@@ -57,7 +61,7 @@ namespace bangazon_inc.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "OrderId,OrderActive")] Order order)
+        public ActionResult Create([Bind(Include = "OrderId,OrderActive,Customer,Payment")] Order order)
         {
             if (ModelState.IsValid)
             {

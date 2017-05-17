@@ -36,10 +36,22 @@ namespace bangazon_inc.Controllers
             return View(product);
         }
 
+        // GET: Products/Category/5
+        public ActionResult Category(int? id)
+        {
+
+            ViewBag.Products = db.Products.Where(x => x.Category.CategoryId == id).ToList();
+            return View();
+        }
+
+
         // GET: Products/Create
         public ActionResult Create()
         {
-            return View();
+            Product product = new Product();
+            product.Customer = db.Customers.Find(2);
+            product.Category = db.Categories.Find(2);
+            return View(product);
         }
 
         // POST: Products/Create
@@ -47,7 +59,7 @@ namespace bangazon_inc.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,Price,Category,Description,Image")] Product product)
+        public ActionResult Create([Bind(Include = "Id,Name,Price,Category,Description,Image,Customer")] Product product)
         {
             if (ModelState.IsValid)
             {
