@@ -32,8 +32,8 @@ namespace bangazon_inc.Controllers
         public ActionResult ActiveOrder()
         {
             MyGlobalVariables.activeCustomer = db.Customers.Find(3);
-            ViewBag.activeOrder = _orderRepository.GetActiveOrder(MyGlobalVariables.activeCustomer);
-            return View("ActiveOrder");
+            var cartId = db.Orders.Where(x => x.Customer.CustomerId == MyGlobalVariables.activeCustomer.CustomerId && x.OrderActive == "1").First().OrderId;
+            return RedirectToAction("Order", "OrderDetail", new { id = cartId});
         }
 
         // GET: Orders/s/5
@@ -43,7 +43,7 @@ namespace bangazon_inc.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            return RedirectToAction("Order", "Order", new { id = id});
+            return RedirectToAction("Order", "OrderDetail", new { id = id});
         }
 
         // GET: Orders/Create
@@ -65,12 +65,18 @@ namespace bangazon_inc.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Orders.Add(order);
+                var newOrder = new Order
+                {
+                    Customer = db.Customers.Find(order.Customer.CustomerId),
+                    Payment = db.Payments.Find(order.Payment.PaymentId),
+                    OrderActive = order.OrderActive
+                };
+                db.Orders.Add(newOrder);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(order);
+            return View("Orders");
         }
 
         // GET: Orders/Edit/5
