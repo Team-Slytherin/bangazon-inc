@@ -14,7 +14,8 @@ namespace bangazon_inc.Controllers
     public class OrderDetailController : Controller
     {
         readonly IOrderDetailRepository _orderDetailRepository;
-        
+        private AppContext db = new AppContext();
+
         public OrderDetailController(IOrderDetailRepository orderDetailRepository)
         {
             _orderDetailRepository = orderDetailRepository;
@@ -23,10 +24,8 @@ namespace bangazon_inc.Controllers
         // GET: OrderDetail
         public ActionResult Order(int id)
         {
-            ViewBag.OrderDetails = _orderDetailRepository.GetAllOrderDetail(id);
-            return View("index");
+            return View(db.OrderDetails.Where(x => x.Order.OrderId == id).ToList());
         }
-        
     }
 }
 

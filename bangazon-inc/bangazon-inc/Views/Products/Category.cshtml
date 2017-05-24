@@ -1,0 +1,61 @@
+﻿@model IEnumerable<bangazon_inc.Models.Product>
+
+@{
+    ViewBag.Title = "Category";
+}
+
+<div>
+    <h4>Product</h4>
+    <hr />
+</div>
+<table class="table">
+    <tr>
+        <th>
+            Name
+        </th>
+        <th>
+            Price
+        </th>
+        <th>
+            Description
+        </th>
+        <th>
+            Image
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Image)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.ProductId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.ProductId })
+            </td>
+            <td>
+                @using (Ajax.BeginForm("SaveToCart", "Products", new { ProductId = item.ProductId, CategoryId = item.Category.CategoryId }, new AjaxOptions()))
+                {
+                    <input type="submit" value="Add To Cart" />
+                }
+            </td>
+       </tr>
+    }
+
+</table>
+
+<p>
+    @Html.ActionLink("Back To Categary List", "Index", "Home", null, null) |
+    @Html.ActionLink("Create New", "Index", "Products", null, null)
+</p>

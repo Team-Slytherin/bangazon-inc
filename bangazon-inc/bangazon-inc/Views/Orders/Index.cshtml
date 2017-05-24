@@ -29,16 +29,12 @@
             @Html.DisplayFor(modelItem => item.OrderActive)
         </td>
         <td>
+            @Html.ActionLink("Details", "Order", "OrderDetail", new { id=item.OrderId }, null)
+             |
             @if (item.OrderActive == "1")
             {
-            @Html.ActionLink("Edit", "Edit", new { id = item.OrderId })
+                <text>Current Cart</text>
             }
-            else
-            {
-                <text>NA</text>
-            }
-             |
-            @Html.ActionLink("Details", "Details", new { id=item.OrderId })
         </td>
     </tr>
 }
